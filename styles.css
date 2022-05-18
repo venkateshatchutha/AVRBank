@@ -5,3 +5,9 @@ body{
 ul{
   text-align: left;
 }
+nav a {
+    border-style: dashed;
+    border-width: 2px;
+    background-color: aliceblue;
+    padding: 8px;
+}
