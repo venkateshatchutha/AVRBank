@@ -5,6 +5,9 @@ body{
 ul{
   text-align: left;
 }
+nav ul {
+    text-align: center;
+}
 nav a {
     border-style: dashed;
     border-width: 2px;
