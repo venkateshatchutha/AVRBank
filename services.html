@@ -20,12 +20,15 @@
         </nav>
     </header>
     <hr>
-    
 	<div>
 	<h2>Services</h2>
 	<ul>
-	<li>Mobile Banking</li>
-	<li>Add Funds</li>
+	<li onclick="loanservice()">Loan</li>
+	    <div id="loanservice">
+	
+		</div>
+	<li>Deposit</li>
+	<div id="Deposit"></div>
 	<li>Money Transfer</li>
 	<li>Fixed Deposit</li>
 	<li>Credit Card</li>
@@ -43,3 +46,67 @@
       </footer>
     </body>
   </html>
+  
+  <script>
+  flag=false
+  function loanservice(){
+  if (flag){
+  document.getElementById('loanservice').innerHTML="";
+  
+  }else{
+  var loanfrm=`<form>
+	  applicant Name: <input type="text" name="name"  id="lname">
+	  <br>
+	  Amount : <input type="number" name="amount" onchange="fillEmi()"  id="lamount"><br>
+	  Type: <select onChange="fillRoi(this.value); fillEmi()"  id="ltype">
+				<option value=1> Home </option>
+				<option value=2> Car </option>
+				<option value=3> Personal </option>
+			</select><br>
+		ROI: <Input type="number" name="roi" id="lroi" value="7" disabled onchange="fillEmi()"><br>
+		Duration(Months):  <input type="number"  id="lduration" name="duration" onchange="fillEmi()" max="300"><br>
+		EMI:  <input type="number"  id="lemi" name="emi" disabled> <br>
+		<input type="submit">
+	  </form>`
+  
+  document.getElementById('loanservice').innerHTML=loanfrm;
+  
+  
+  }
+  flag=!flag
+  }
+  function fillRoi(a){
+		var duration = document.getElementById("lduration")
+	  intrest=""
+	  if(a=="1"){
+	  intrest=7;
+	  duration.setAttribute("max",300);
+	  }else if(a=="2"){
+	  intrest=9;
+	  duration.setAttribute("max",84);
+	  }else if(a=="3"){
+	  intrest=12;
+	  duration.setAttribute("max",60);
+	  }
+	  document.getElementById('lroi').value=intrest;
+	  document.getElementById('lduration').value="";
+  }
+  function fillEmi(){
+	amount= document.getElementById('lamount').value
+	duration= document.getElementById('lduration').value
+	roi= document.getElementById('lroi').value
+	if(amount.length>0 && duration.length>0 && roi.length>0){
+	amount=parseInt(amount)
+	duration=parseInt(duration)/12
+	roi=parseInt(roi)/100
+	totalamount=amount*(1+roi*duration)
+	emi=totalamount/(12*duration)
+	emi=Math.round(emi)
+	document.getElementById('lemi').value=emi;
+	}else{
+	document.getElementById('lemi').value="";
+	}
+  
+  }
+  
+  </script>
