@@ -23,12 +23,12 @@
 	<div>
 	<h2>Services</h2>
 	<ul>
-	<li onclick="loanservice()">Loan</li>
+	<li onclick="loanservice()" id="loan">Loan</li>
 	    <div id="loanservice">
 	
 		</div>
-	<li>Deposit</li>
-	<div id="Deposit"></div>
+	<li onclick="depositservice()" id="deposit">Deposit</li>
+	<div id="depositservice"></div>
 	<li>Money Transfer</li>
 	<li>Fixed Deposit</li>
 	<li>Credit Card</li>
@@ -48,12 +48,18 @@
   </html>
   
   <script>
-  flag=false
+  lflag=false
+    document.getElementById('loan').innerText="Loan";
+  document.getElementById('loan').style.color="green";
   function loanservice(){
-  if (flag){
+  if (lflag){
   document.getElementById('loanservice').innerHTML="";
+  document.getElementById('loan').innerText="Loan";
+  document.getElementById('loan').style.color="green";
   
   }else{
+    document.getElementById('loan').innerText="Hide Loan";
+  document.getElementById('loan').style.color="blue";
   var loanfrm=`<form>
 	  applicant Name: <input type="text" name="name"  id="lname">
 	  <br>
@@ -73,7 +79,7 @@
   
   
   }
-  flag=!flag
+  lflag=!lflag
   }
   function fillRoi(a){
 		var duration = document.getElementById("lduration")
@@ -109,4 +115,50 @@
   
   }
   
+  </script>
+  <script>
+  dflag=false
+        document.getElementById('deposit').innerText="Deposit";
+  document.getElementById('deposit').style.color="green";
+  function depositservice(){
+    if (dflag){
+  document.getElementById('depositservice').innerHTML="";
+      document.getElementById('deposit').innerText="Deposit";
+  document.getElementById('deposit').style.color="green";
+  
+  }else{
+      document.getElementById('deposit').innerText="Hide Deposit";
+  document.getElementById('deposit').style.color="blue";
+  var depositfrm=`<form>
+	  applicant Name: <input type="text" name="name"  id="dname">
+	  <br>
+	  Amount : <input type="number" name="amount" onchange="dfillEmi()"  id="damount"><br>
+		Duration(Months):  <input type="number"  id="dduration" name="duration" onchange="dfillEmi()" max="300"><br>
+	 
+		ROI: <Input type="number" name="roi" id="droi" value="5" disabled onchange="dfillEmi()"><br>
+		Maturity:  <input type="number"  id="dmaturity" name="maturity" disabled> <br>
+		<input type="submit">
+	  </form>`
+  
+  document.getElementById('depositservice').innerHTML=depositfrm;
+  
+  
+  }
+  dflag=!dflag
+  }
+  function dfillEmi(){
+	amount= document.getElementById('damount').value
+	duration= document.getElementById('dduration').value
+	roi= document.getElementById('droi').value
+	if(amount.length>0 && duration.length>0 && roi.length>0){
+	amount=parseInt(amount)
+	duration=parseInt(duration)/12
+	roi=parseInt(roi)/100
+	totalamount=amount*(1+roi*duration)
+	
+	document.getElementById('dmaturity').value=totalamount.toFixed(2);
+	}else{
+	document.getElementById('dmaturity').value="";
+	}
+	}
   </script>
