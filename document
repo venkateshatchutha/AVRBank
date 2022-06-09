@@ -1,0 +1,10 @@
+1. using log4j for loging the details
+2. per4j for stopwatch api and ploting graph.
+3. alerting with java mail jar file.
+
+
+if we want customized graph then we have to go with kibana for visualization
+log stash and for retriving and storing the data in elastic search.
+
+or 
+promotheus exporter to export the data to promoteous. then grafana to visualize the data. and alerting.
