@@ -9,6 +9,8 @@ headers = ['Tag', 'Start', 'End', 'Mean', 'Min', 'Max', 'Std', 'Cnt']
 df = pd.read_csv('C:/Users/User/Documents/MS-Projects/test/test.csv', parse_dates=True, names=headers)
 df['Start'] = df['Start'].map(lambda x: datetime.strptime(str(x), '%Y-%m-%d %H:%M:%S'))
 print(df)
+names = ['Function2','{}Function2']
+df=df[df.Tag.isin(names)]
 df = df.pivot(index='Start', columns='Tag', values='Mean')
 df.plot()
 plt.show()
